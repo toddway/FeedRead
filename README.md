@@ -4,7 +4,7 @@ approach for sharing code between Android and iOS.
 [j2objc](https://github.com/google/j2objc) is used to translate the project's [core](core)
 Java module and it's unit tests into Objective-C.
 
-The feature set is intentionally contrived as a proof of concept.  Here is the central user story:
+The features are intentionally contrived for proof of concept.  Here is the central user story:
 
 
     As a mobile user I want to provide an RSS URL and see a list of the articles.
@@ -26,7 +26,6 @@ To execute the data integration tests: `./gradlew data:test`
 
 To generate Objective-C files for the core module
 
-1. set the j2objcHome path in [the core build.gradle](core/build.gradle)
+1. set your j2objcHome path in [the core build.gradle](core/build.gradle)
 2. run `./gradlew core:j2objcCompile`
-
 3. find the generated files in [./core/build/j2objc](core/build/j2objc)
