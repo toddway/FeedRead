@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile('org.robolectric:robolectric:3.0-rc2') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+}
+
+apply from: 'j2objc.gradle'
+j2objcConfig {
+    // MODIFY to where your unzipped j2objc directory is located
+    // NOTE download the latest version from: https://github.com/google/j2objc/releases
+    j2objcHome "/usr/local/j2objc-0.9.7"  // e.g. "${projectDir}/../../j2objc or absolute path
+
+    // MODIFY to where generated objc files should be put for Xcode project
+    // NOTE these files should be checked in to the repository and updated as needed
+    // NOTE this should contain ONLY j2objc generated files, other contents will be deleted
+    destDir "${projectDir}/j2objc"  // e.g. "${projectDir}/../Xcode/j2objc-generated"
+
+    testExecutedCheck false
+
+    appendProjectDependenciesToSourcepath = true
+    translateSourcepaths "${projectDir}/libs/shelf.jar"
+    translateFlags = "--no-package-directories -use-arc --build-closure"
+
+}
+
