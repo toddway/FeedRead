@@ -20,13 +20,12 @@ j2objcConfig {
     // MODIFY to where generated objc files should be put for Xcode project
     // NOTE these files should be checked in to the repository and updated as needed
     // NOTE this should contain ONLY j2objc generated files, other contents will be deleted
-    destDir "${projectDir}/j2objc"  // e.g. "${projectDir}/../Xcode/j2objc-generated"
+    destDir "${projectDir}/j2objc_output"  // e.g. "${projectDir}/../Xcode/j2objc-generated"
 
     testExecutedCheck false
 
     appendProjectDependenciesToSourcepath = true
     translateSourcepaths "${projectDir}/libs/shelf.jar"
-    translateFlags = "--no-package-directories -use-arc --build-closure"
-
+    translateFlags = "-use-arc --build-closure"
 }
 
