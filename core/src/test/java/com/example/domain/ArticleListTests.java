@@ -22,16 +22,13 @@ public class ArticleListTests {
 
     GetArticleListInteractor getArticleListInteractor;
     ArticleRepository articleRepository;
-    Shelf cacheShelf;
     static String URL = "mock url";
 
     @Before
     public void beforeEach() {
-        cacheShelf = new Shelf(new File("/tmp/shelf"));
-        cacheShelf.clear("");
         articleRepository = mock(ArticleRepository.class);
         when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList1());
-        getArticleListInteractor = new GetArticleListInteractor(articleRepository, cacheShelf);
+        getArticleListInteractor = new GetArticleListInteractor(articleRepository, new File("/tmp/shelf"));
     }
 
     @Test

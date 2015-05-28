@@ -18,11 +18,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //prevents simplexml library collision - https://github.com/square/retrofit/issues/507
+    configurations {
+        compile.exclude group: 'stax'
+        compile.exclude group: 'xpp3'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'com.jakewharton:butterknife:5.1.2'
+
+
+    compile project(':data')
+    compile project(':core')
+    compile fileTree(dir: '../core/libs', include: ['shelf.jar'])
 
     testCompile 'junit:junit:4.12'
     testCompile('org.robolectric:robolectric:3.0-rc2') {

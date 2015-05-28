@@ -19,15 +19,12 @@ public class RetrofitArticleTests {
 
     GetArticleListInteractor getArticleListInteractor;
     ArticleRepository articleRepository;
-    Shelf cacheShelf;
     static String URL = "http://feeds.feedburner.com/toddway";
 
     @Before
     public void setUp() {
-        cacheShelf = new Shelf(new File("/tmp/shelf"));
-        cacheShelf.clear("");
         articleRepository = new RetrofitArticleRepository();
-        getArticleListInteractor = new GetArticleListInteractor(articleRepository, cacheShelf);
+        getArticleListInteractor = new GetArticleListInteractor(articleRepository, new File("/tmp/shelf"));
     }
 
     @Test

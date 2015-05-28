@@ -1,19 +1,41 @@
-package com.example;
+package com.example.ui;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.example.data.RetrofitArticleRepository;
+import com.example.domain.Article;
+import com.example.domain.GetArticleListInteractor;
 import com.example.feedread.R;
 
+import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+
+public class MainActivity extends ActionBarActivity implements ArticleListView {
+
+    ArticleListPresenter articleListPresenter;
+    @InjectView(R.id.hello_world)
+    TextView helloWorldTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.inject(this);
+
+        articleListPresenter = new ArticleListPresenter(this, new GetArticleListInteractor(
+                new RetrofitArticleRepository(),
+                getDir("shelf", MODE_PRIVATE)
+        ));
+
+        articleListPresenter.fetchArticleList();
     }
 
     @Override
@@ -36,5 +58,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void renderArticleList(List<Article> articles) {
+        helloWorldTextView.setText("Articles:\n" + articles);
     }
 }
