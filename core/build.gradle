@@ -21,7 +21,7 @@ j2objcConfig {
     testExecutedCheck false
 
     appendProjectDependenciesToSourcepath = true
-    translateSourcepaths "${projectDir}/libs/shelf.jar"
+    translateSourcepaths "${projectDir}/libs/shelf.jar:${projectDir}/libs/gson-2.3.1-sources.jar"
     translateFlags = "-use-arc --build-closure"
 }
 

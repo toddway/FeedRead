@@ -42,7 +42,7 @@ public class ArticleListTests {
 
     @Test
     public void testGetArticleTitle() throws Exception {
-        List<Article> articles = getArticleListInteractor.get(URL);
+        List<Article> articles = getArticleListInteractor.useCache(false).get(URL);
         assertEquals(articles.get(0).getTitle(), sampleArticleList1().get(0).getTitle());
     }
 

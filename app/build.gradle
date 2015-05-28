@@ -36,7 +36,7 @@ dependencies {
 
     compile project(':data')
     compile project(':core')
-    compile fileTree(dir: '../core/libs', include: ['shelf.jar'])
+    compile fileTree(dir: '../core/libs', include: ['*.jar'])
 
     testCompile 'junit:junit:4.12'
     testCompile('org.robolectric:robolectric:3.0-rc2') {
