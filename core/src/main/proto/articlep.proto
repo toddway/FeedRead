@@ -1,0 +1,10 @@
+package com.example.domain;
+
+option java_package = "com.example.domain";
+option java_outer_classname = "Protos";
+
+message ArticleP {
+    required string title = 1;
+    optional string link = 2;
+    repeated string category = 3;
+}

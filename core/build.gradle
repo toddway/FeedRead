@@ -5,6 +5,8 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"
+
+    compile 'com.google.protobuf:protobuf-java:3.0.0-alpha-2'
 }
 
 apply from: 'j2objc.gradle'
@@ -24,4 +26,18 @@ j2objcConfig {
     translateSourcepaths "${projectDir}/libs/shelf.jar:${projectDir}/libs/gson-2.3.1-sources.jar"
     translateFlags = "-use-arc --build-closure"
 }
+
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.4.1'
+    }
+}
+
+protocDep = 'com.google.protobuf:protoc:3.0.0-alpha-2'
+
 

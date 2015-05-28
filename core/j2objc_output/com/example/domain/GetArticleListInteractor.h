@@ -9,6 +9,7 @@
 #include "J2ObjC_header.h"
 
 @class ComToddwayShelfShelf;
+@class JavaIoFile;
 @protocol ComExampleDomainArticleRepository;
 @protocol JavaUtilList;
 
@@ -22,7 +23,7 @@
 #pragma mark Public
 
 - (instancetype)initWithComExampleDomainArticleRepository:(id<ComExampleDomainArticleRepository>)articleRepository
-                                 withComToddwayShelfShelf:(ComToddwayShelfShelf *)cacheShelf;
+                                           withJavaIoFile:(JavaIoFile *)cacheDirectory;
 
 + (id<JavaUtilList>)filterByCategoryWithNSString:(NSString *)category
                                 withJavaUtilList:(id<JavaUtilList>)articles;
@@ -38,9 +39,9 @@ J2OBJC_EMPTY_STATIC_INIT(ComExampleDomainGetArticleListInteractor)
 J2OBJC_FIELD_SETTER(ComExampleDomainGetArticleListInteractor, articleRepository_, id<ComExampleDomainArticleRepository>)
 J2OBJC_FIELD_SETTER(ComExampleDomainGetArticleListInteractor, cacheShelf_, ComToddwayShelfShelf *)
 
-FOUNDATION_EXPORT void ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(ComExampleDomainGetArticleListInteractor *self, id<ComExampleDomainArticleRepository> articleRepository, ComToddwayShelfShelf *cacheShelf);
+FOUNDATION_EXPORT void ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(ComExampleDomainGetArticleListInteractor *self, id<ComExampleDomainArticleRepository> articleRepository, JavaIoFile *cacheDirectory);
 
-FOUNDATION_EXPORT ComExampleDomainGetArticleListInteractor *new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(id<ComExampleDomainArticleRepository> articleRepository, ComToddwayShelfShelf *cacheShelf) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ComExampleDomainGetArticleListInteractor *new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(id<ComExampleDomainArticleRepository> articleRepository, JavaIoFile *cacheDirectory) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT id<JavaUtilList> ComExampleDomainGetArticleListInteractor_filterByCategoryWithNSString_withJavaUtilList_(NSString *category, id<JavaUtilList> articles);
 

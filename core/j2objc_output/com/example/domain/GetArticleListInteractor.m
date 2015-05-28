@@ -11,6 +11,7 @@
 #include "com/example/domain/GetArticleListInteractor.h"
 #include "com/toddway/shelf/Shelf.h"
 #include "com/toddway/shelf/ShelfItem.h"
+#include "java/io/File.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "java/util/concurrent/TimeUnit.h"
@@ -18,8 +19,8 @@
 @implementation ComExampleDomainGetArticleListInteractor
 
 - (instancetype)initWithComExampleDomainArticleRepository:(id<ComExampleDomainArticleRepository>)articleRepository
-                                 withComToddwayShelfShelf:(ComToddwayShelfShelf *)cacheShelf {
-  ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(self, articleRepository, cacheShelf);
+                                           withJavaIoFile:(JavaIoFile *)cacheDirectory {
+  ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(self, articleRepository, cacheDirectory);
   return self;
 }
 
@@ -46,7 +47,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithComExampleDomainArticleRepository:withComToddwayShelfShelf:", "GetArticleListInteractor", NULL, 0x1, NULL, NULL },
+    { "initWithComExampleDomainArticleRepository:withJavaIoFile:", "GetArticleListInteractor", NULL, 0x1, NULL, NULL },
     { "getWithNSString:", "get", "Ljava.util.List;", 0x1, NULL, NULL },
     { "useCacheWithBoolean:", "useCache", "Lcom.example.domain.GetArticleListInteractor;", 0x1, NULL, NULL },
     { "filterByCategoryWithNSString:withJavaUtilList:", "filterByCategory", "Ljava.util.List;", 0x9, NULL, NULL },
@@ -62,16 +63,16 @@
 
 @end
 
-void ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(ComExampleDomainGetArticleListInteractor *self, id<ComExampleDomainArticleRepository> articleRepository, ComToddwayShelfShelf *cacheShelf) {
+void ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(ComExampleDomainGetArticleListInteractor *self, id<ComExampleDomainArticleRepository> articleRepository, JavaIoFile *cacheDirectory) {
   (void) NSObject_init(self);
   self->useCache__ = YES;
   self->articleRepository_ = articleRepository;
-  self->cacheShelf_ = cacheShelf;
+  self->cacheShelf_ = new_ComToddwayShelfShelf_initWithJavaIoFile_(cacheDirectory);
 }
 
-ComExampleDomainGetArticleListInteractor *new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(id<ComExampleDomainArticleRepository> articleRepository, ComToddwayShelfShelf *cacheShelf) {
+ComExampleDomainGetArticleListInteractor *new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(id<ComExampleDomainArticleRepository> articleRepository, JavaIoFile *cacheDirectory) {
   ComExampleDomainGetArticleListInteractor *self = [ComExampleDomainGetArticleListInteractor alloc];
-  ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withComToddwayShelfShelf_(self, articleRepository, cacheShelf);
+  ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(self, articleRepository, cacheDirectory);
   return self;
 }
 

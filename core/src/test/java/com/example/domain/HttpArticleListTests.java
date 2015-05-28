@@ -25,5 +25,8 @@ public class HttpArticleListTests {
     public void testSomething() {
         List<Article> articles = getArticleListInteractor.get(URL);
         System.out.println("articles:" + articles);
+
+//        Protos.ArticleP p = Protos.ArticleP.newBuilder().setTitle("test").build();
+//        System.out.println("proto:" + p);
     }
 }
