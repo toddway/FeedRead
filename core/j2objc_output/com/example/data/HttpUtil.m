@@ -19,8 +19,8 @@
 
 @implementation ComExampleDataHttpUtil
 
-+ (NSString *)getResponseStringWithNSString:(NSString *)urlString {
-  return ComExampleDataHttpUtil_getResponseStringWithNSString_(urlString);
++ (NSString *)toStringWithNSString:(NSString *)urlString {
+  return ComExampleDataHttpUtil_toStringWithNSString_(urlString);
 }
 
 - (instancetype)init {
@@ -30,7 +30,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getResponseStringWithNSString:", "getResponseString", "Ljava.lang.String;", 0x9, NULL, NULL },
+    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _ComExampleDataHttpUtil = { 2, "HttpUtil", "com.example.data", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
@@ -39,12 +39,11 @@
 
 @end
 
-NSString *ComExampleDataHttpUtil_getResponseStringWithNSString_(NSString *urlString) {
+NSString *ComExampleDataHttpUtil_toStringWithNSString_(NSString *urlString) {
   ComExampleDataHttpUtil_initialize();
   JavaNetHttpURLConnection *urlConnection = nil;
   @try {
-    JavaNetURL *u = new_JavaNetURL_initWithNSString_(urlString);
-    urlConnection = (JavaNetHttpURLConnection *) check_class_cast([u openConnection], [JavaNetHttpURLConnection class]);
+    urlConnection = (JavaNetHttpURLConnection *) check_class_cast([new_JavaNetURL_initWithNSString_(urlString) openConnection], [JavaNetHttpURLConnection class]);
     [((JavaNetHttpURLConnection *) nil_chk(urlConnection)) connect];
     jint status = [urlConnection getResponseCode];
     {

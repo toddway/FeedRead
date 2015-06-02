@@ -2,6 +2,8 @@ apply plugin: 'java'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.guava:guava:18.0'
+    compile project(path: ':shelf')
 
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"
@@ -21,7 +23,7 @@ j2objcConfig {
     testExecutedCheck false
 
     appendProjectDependenciesToSourcepath = true
-    translateSourcepaths "${projectDir}/libs/shelf.jar:${projectDir}/libs/gson-2.3.1-sources.jar"
+    translateSourcepaths "${projectDir}/libs/gson-2.3.1-sources.jar"
     translateFlags = "-use-arc --build-closure"
 }
 
@@ -40,8 +42,23 @@ protocDep = 'com.google.protobuf:protoc:3.0.0-alpha-2'
 
 dependencies {
     compile 'com.google.protobuf:protobuf-java:3.0.0-alpha-2'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-2'
 }
 
+
+sourceSets {
+    main {
+        proto {
+            builtins {
+                javanano {
+                    // Options added to --javanano_out
+                    option 'java_multiple_files=true'
+                    option 'ignore_services=true'
+                }
+            }
+        }
+    }
+}
 
 
 

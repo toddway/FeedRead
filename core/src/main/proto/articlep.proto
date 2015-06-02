@@ -8,3 +8,17 @@ message ArticleP {
     optional string link = 2;
     repeated string category = 3;
 }
+
+message FeedResponse {
+    optional ResponseData responseData = 1;
+    optional int32 responseStatus = 2;
+}
+
+message ResponseData {
+    optional Feed feed = 1;
+}
+
+message Feed {
+    repeated ArticleP entries = 1;
+    optional string title = 2;
+}

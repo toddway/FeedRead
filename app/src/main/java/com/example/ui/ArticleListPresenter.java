@@ -1,7 +1,7 @@
 package com.example.ui;
 
 import com.example.domain.Article;
-import com.example.domain.GetArticleListInteractor;
+import com.example.domain.ArticleListInteractor;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import rx.functions.Action1;
 
 public class ArticleListPresenter extends BasePresenter {
     ArticleListView articleListView;
-    GetArticleListInteractor getArticleListInteractor;
+    ArticleListInteractor articleListInteractor;
 
-    public ArticleListPresenter(ArticleListView articleListView, GetArticleListInteractor getArticleListInteractor) {
+    public ArticleListPresenter(ArticleListView articleListView, ArticleListInteractor articleListInteractor) {
         this.articleListView = articleListView;
-        this.getArticleListInteractor = getArticleListInteractor;
+        this.articleListInteractor = articleListInteractor;
     }
 
     public void fetchArticleList() {
@@ -36,7 +36,7 @@ public class ArticleListPresenter extends BasePresenter {
         return Observable.create(new Observable.OnSubscribe<List<Article>>() {
             @Override
             public void call(Subscriber<? super List<Article>> subscriber) {
-                List<Article> articles = getArticleListInteractor.get("http://feeds.feedburner.com/toddway");
+                List<Article> articles = articleListInteractor.get("http://feeds.feedburner.com/toddway");
                 subscriber.onNext(articles);
                 subscriber.onCompleted();
             }

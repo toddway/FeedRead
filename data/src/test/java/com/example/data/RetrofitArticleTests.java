@@ -1,10 +1,8 @@
 package com.example.data;
 
-import com.example.data.RetrofitArticleRepository;
 import com.example.domain.Article;
 import com.example.domain.ArticleRepository;
-import com.example.domain.GetArticleListInteractor;
-import com.toddway.shelf.Shelf;
+import com.example.domain.ArticleListInteractor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +15,14 @@ import static org.junit.Assert.*;
 
 public class RetrofitArticleTests {
 
-    GetArticleListInteractor getArticleListInteractor;
+    ArticleListInteractor articleListInteractor;
     ArticleRepository articleRepository;
     static String URL = "http://feeds.feedburner.com/toddway";
 
     @Before
     public void setUp() {
         articleRepository = new RetrofitArticleRepository();
-        getArticleListInteractor = new GetArticleListInteractor(articleRepository, new File("/tmp/shelf"));
+        articleListInteractor = new ArticleListInteractor(articleRepository, new File("/tmp/shelf"));
     }
 
     @Test
@@ -41,7 +39,7 @@ public class RetrofitArticleTests {
 
     @Test
     public void testGetArticleListInteractor() throws Exception {
-        List<Article> articles = getArticleListInteractor.get(URL);
+        List<Article> articles = articleListInteractor.get(URL);
         assertTrue(articles.size() > 0 && articles.size() <= 5);
 
         System.out.println("interactor list size=" + articles.size());

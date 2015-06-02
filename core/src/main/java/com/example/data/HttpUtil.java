@@ -8,11 +8,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HttpUtil {
-    public static String getResponseString(String urlString) {
+    public static String toString(String urlString) {
         HttpURLConnection urlConnection = null;
         try {
-            URL u = new URL(urlString);
-            urlConnection = (HttpURLConnection) u.openConnection();
+            urlConnection = (HttpURLConnection) new URL(urlString).openConnection();
             urlConnection.connect();
             int status = urlConnection.getResponseCode();
 

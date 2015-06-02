@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.data.HttpArticleRepository;
+import com.example.data.GsonArticleRepository;
 import com.example.domain.Article;
-import com.example.domain.GetArticleListInteractor;
+import com.example.domain.ArticleListInteractor;
 import com.example.feedread.R;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public class MainActivity extends ActionBarActivity implements ArticleListView {
 
         ButterKnife.inject(this);
 
-        articleListPresenter = new ArticleListPresenter(this, new GetArticleListInteractor(
-                new HttpArticleRepository(),
+        articleListPresenter = new ArticleListPresenter(this, new ArticleListInteractor(
+                new GsonArticleRepository(),
                 getDir("feedcache", MODE_PRIVATE)
         ));
 

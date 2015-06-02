@@ -8,9 +8,9 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "com/example/domain/Article.h"
+#include "com/example/domain/ArticleListInteractor.h"
 #include "com/example/domain/ArticleListTests.h"
 #include "com/example/domain/ArticleRepository.h"
-#include "com/example/domain/GetArticleListInteractor.h"
 #include "java/io/File.h"
 #include "java/io/PrintStream.h"
 #include "java/lang/Exception.h"
@@ -42,11 +42,11 @@ NSString *ComExampleDomainArticleListTests_URL_ = @"mock url";
 - (void)beforeEach {
   articleRepository_ = OrgMockitoMockito_mockWithIOSClass_(ComExampleDomainArticleRepository_class_());
   (void) [((id<OrgMockitoStubbingOngoingStubbing>) nil_chk(OrgMockitoMockito_whenWithId_([((id<ComExampleDomainArticleRepository>) nil_chk(articleRepository_)) getArticlesWithNSString:ComExampleDomainArticleListTests_URL_]))) thenReturnWithId:ComExampleDomainArticleListTests_sampleArticleList1(self)];
-  getArticleListInteractor_ = new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(articleRepository_, new_JavaIoFile_initWithNSString_(@"/tmp/shelf"));
+  articleListInteractor_ = new_ComExampleDomainArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(articleRepository_, new_JavaIoFile_initWithNSString_(@"/tmp/shelf"));
 }
 
 - (void)testGetArticles {
-  id<JavaUtilList> articles = [((ComExampleDomainGetArticleListInteractor *) nil_chk(getArticleListInteractor_)) getWithNSString:ComExampleDomainArticleListTests_URL_];
+  id<JavaUtilList> articles = [((ComExampleDomainArticleListInteractor *) nil_chk(articleListInteractor_)) getWithNSString:ComExampleDomainArticleListTests_URL_];
   OrgJunitAssert_assertTrueWithBoolean_([((id<JavaUtilList>) nil_chk(articles)) size] <= 5);
   for (ComExampleDomainArticle * __strong article in articles) {
     [((JavaIoPrintStream *) nil_chk(JavaLangSystem_get_out_())) printlnWithNSString:[((ComExampleDomainArticle *) nil_chk(article)) description]];
@@ -54,15 +54,15 @@ NSString *ComExampleDomainArticleListTests_URL_ = @"mock url";
 }
 
 - (void)testGetArticleTitle {
-  id<JavaUtilList> articles = [((ComExampleDomainGetArticleListInteractor *) nil_chk([((ComExampleDomainGetArticleListInteractor *) nil_chk(getArticleListInteractor_)) useCacheWithBoolean:NO])) getWithNSString:ComExampleDomainArticleListTests_URL_];
-  OrgJunitAssert_assertEqualsWithId_withId_([((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(articles)) getWithInt:0])) getTitle], [((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(ComExampleDomainArticleListTests_sampleArticleList1(self))) getWithInt:0])) getTitle]);
+  id<JavaUtilList> articles = [((ComExampleDomainArticleListInteractor *) nil_chk([((ComExampleDomainArticleListInteractor *) nil_chk(articleListInteractor_)) useCacheWithBoolean:NO])) getWithNSString:ComExampleDomainArticleListTests_URL_];
+  OrgJunitAssert_assertEqualsWithId_withId_(((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(articles)) getWithInt:0]))->title_, ((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(ComExampleDomainArticleListTests_sampleArticleList1(self))) getWithInt:0]))->title_);
 }
 
 - (void)testGetArticleTitleIgnoringCache {
   [self testGetArticleTitle];
   (void) [((id<OrgMockitoStubbingOngoingStubbing>) nil_chk(OrgMockitoMockito_whenWithId_([((id<ComExampleDomainArticleRepository>) nil_chk(articleRepository_)) getArticlesWithNSString:ComExampleDomainArticleListTests_URL_]))) thenReturnWithId:ComExampleDomainArticleListTests_sampleArticleList2(self)];
-  id<JavaUtilList> articles = [((ComExampleDomainGetArticleListInteractor *) nil_chk([((ComExampleDomainGetArticleListInteractor *) nil_chk(getArticleListInteractor_)) useCacheWithBoolean:NO])) getWithNSString:ComExampleDomainArticleListTests_URL_];
-  OrgJunitAssert_assertEqualsWithId_withId_([((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(articles)) getWithInt:0])) getTitle], [((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(ComExampleDomainArticleListTests_sampleArticleList2(self))) getWithInt:0])) getTitle]);
+  id<JavaUtilList> articles = [((ComExampleDomainArticleListInteractor *) nil_chk([((ComExampleDomainArticleListInteractor *) nil_chk(articleListInteractor_)) useCacheWithBoolean:NO])) getWithNSString:ComExampleDomainArticleListTests_URL_];
+  OrgJunitAssert_assertEqualsWithId_withId_(((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(articles)) getWithInt:0]))->title_, ((ComExampleDomainArticle *) nil_chk([((id<JavaUtilList>) nil_chk(ComExampleDomainArticleListTests_sampleArticleList2(self))) getWithInt:0]))->title_);
 }
 
 - (id<JavaUtilList>)sampleArticleList1 {
@@ -105,7 +105,7 @@ NSString *ComExampleDomainArticleListTests_URL_ = @"mock url";
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "getArticleListInteractor_", NULL, 0x0, "Lcom.example.domain.GetArticleListInteractor;", NULL, NULL,  },
+    { "articleListInteractor_", NULL, 0x0, "Lcom.example.domain.ArticleListInteractor;", NULL, NULL,  },
     { "articleRepository_", NULL, 0x0, "Lcom.example.domain.ArticleRepository;", NULL, NULL,  },
     { "URL_", NULL, 0x8, "Ljava.lang.String;", &ComExampleDomainArticleListTests_URL_, NULL,  },
   };

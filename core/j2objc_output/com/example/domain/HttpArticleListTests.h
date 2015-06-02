@@ -8,12 +8,12 @@
 
 #include "J2ObjC_header.h"
 
-@class ComExampleDomainGetArticleListInteractor;
+@class ComExampleDomainArticleListInteractor;
 @protocol ComExampleDomainArticleRepository;
 
 @interface ComExampleDomainHttpArticleListTests : NSObject {
  @public
-  ComExampleDomainGetArticleListInteractor *getArticleListInteractor_;
+  ComExampleDomainArticleListInteractor *articleListInteractor_;
   id<ComExampleDomainArticleRepository> articleRepository_;
 }
 
@@ -29,7 +29,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ComExampleDomainHttpArticleListTests)
 
-J2OBJC_FIELD_SETTER(ComExampleDomainHttpArticleListTests, getArticleListInteractor_, ComExampleDomainGetArticleListInteractor *)
+J2OBJC_FIELD_SETTER(ComExampleDomainHttpArticleListTests, articleListInteractor_, ComExampleDomainArticleListInteractor *)
 J2OBJC_FIELD_SETTER(ComExampleDomainHttpArticleListTests, articleRepository_, id<ComExampleDomainArticleRepository>)
 
 FOUNDATION_EXPORT NSString *ComExampleDomainHttpArticleListTests_URL_;

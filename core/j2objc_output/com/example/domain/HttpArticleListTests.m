@@ -6,9 +6,9 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "com/example/data/HttpArticleRepository.h"
+#include "com/example/data/GsonArticleRepository.h"
+#include "com/example/domain/ArticleListInteractor.h"
 #include "com/example/domain/ArticleRepository.h"
-#include "com/example/domain/GetArticleListInteractor.h"
 #include "com/example/domain/HttpArticleListTests.h"
 #include "java/io/File.h"
 #include "java/io/PrintStream.h"
@@ -22,12 +22,12 @@ NSString *ComExampleDomainHttpArticleListTests_URL_ = @"http://feeds.feedburner.
 @implementation ComExampleDomainHttpArticleListTests
 
 - (void)beforeEach {
-  articleRepository_ = new_ComExampleDataHttpArticleRepository_init();
-  getArticleListInteractor_ = new_ComExampleDomainGetArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(articleRepository_, new_JavaIoFile_initWithNSString_(@"/tmp/shelf"));
+  articleRepository_ = new_ComExampleDataGsonArticleRepository_init();
+  articleListInteractor_ = new_ComExampleDomainArticleListInteractor_initWithComExampleDomainArticleRepository_withJavaIoFile_(articleRepository_, new_JavaIoFile_initWithNSString_(@"/tmp/shelf"));
 }
 
 - (void)testSomething {
-  id<JavaUtilList> articles = [((ComExampleDomainGetArticleListInteractor *) nil_chk(getArticleListInteractor_)) getWithNSString:ComExampleDomainHttpArticleListTests_URL_];
+  id<JavaUtilList> articles = [((ComExampleDomainArticleListInteractor *) nil_chk(articleListInteractor_)) getWithNSString:ComExampleDomainHttpArticleListTests_URL_];
   [((JavaIoPrintStream *) nil_chk(JavaLangSystem_get_out_())) printlnWithNSString:JreStrcat("$@", @"articles:", articles)];
 }
 
@@ -51,7 +51,7 @@ NSString *ComExampleDomainHttpArticleListTests_URL_ = @"http://feeds.feedburner.
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "getArticleListInteractor_", NULL, 0x0, "Lcom.example.domain.GetArticleListInteractor;", NULL, NULL,  },
+    { "articleListInteractor_", NULL, 0x0, "Lcom.example.domain.ArticleListInteractor;", NULL, NULL,  },
     { "articleRepository_", NULL, 0x0, "Lcom.example.domain.ArticleRepository;", NULL, NULL,  },
     { "URL_", NULL, 0x8, "Ljava.lang.String;", &ComExampleDomainHttpArticleListTests_URL_, NULL,  },
   };

@@ -1,1 +1,4 @@
 include ':app', ':data', 'core'
+
+include ':shelf'
+project(':shelf').projectDir = new File(settingsDir, '../Shelf/shelf')

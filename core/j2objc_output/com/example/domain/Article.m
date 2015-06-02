@@ -11,24 +11,12 @@
 
 @implementation ComExampleDomainArticle
 
-- (void)setLinkWithNSString:(NSString *)link {
-  self->link_ = link;
-}
-
 - (NSString *)getTitle {
   return title_;
 }
 
-- (void)setTitleWithNSString:(NSString *)title {
-  self->title_ = title;
-}
-
 - (id<JavaUtilList>)getCategories {
   return categories_;
-}
-
-- (void)setCategoriesWithJavaUtilList:(id<JavaUtilList>)categories {
-  self->categories_ = categories;
 }
 
 - (NSString *)getLink {
@@ -56,11 +44,8 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "setLinkWithNSString:", "setLink", "V", 0x1, NULL, NULL },
     { "getTitle", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setTitleWithNSString:", "setTitle", "V", 0x1, NULL, NULL },
     { "getCategories", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
-    { "setCategoriesWithJavaUtilList:", "setCategories", "V", 0x1, NULL, NULL },
     { "getLink", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -71,10 +56,10 @@
     { "title_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL,  },
     { "categories_", NULL, 0x0, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/String;>;",  },
     { "link_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL,  },
-    { "imageUrl_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL,  },
+    { "imageUrl_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL,  },
     { "description__", "description", 0x0, "Ljava.lang.String;", NULL, NULL,  },
   };
-  static const J2ObjcClassInfo _ComExampleDomainArticle = { 2, "Article", "com.example.domain", NULL, 0x1, 10, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _ComExampleDomainArticle = { 2, "Article", "com.example.domain", NULL, 0x1, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_ComExampleDomainArticle;
 }
 
@@ -83,8 +68,8 @@
 ComExampleDomainArticle *ComExampleDomainArticle_createWithNSString_withJavaUtilList_(NSString *title, id<JavaUtilList> categories) {
   ComExampleDomainArticle_initialize();
   ComExampleDomainArticle *article = new_ComExampleDomainArticle_init();
-  [article setTitleWithNSString:title];
-  [article setCategoriesWithJavaUtilList:categories];
+  article->title_ = title;
+  article->categories_ = categories;
   return article;
 }
 

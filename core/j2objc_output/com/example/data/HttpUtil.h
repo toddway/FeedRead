@@ -14,13 +14,13 @@
 
 - (instancetype)init;
 
-+ (NSString *)getResponseStringWithNSString:(NSString *)urlString;
++ (NSString *)toStringWithNSString:(NSString *)urlString;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ComExampleDataHttpUtil)
 
-FOUNDATION_EXPORT NSString *ComExampleDataHttpUtil_getResponseStringWithNSString_(NSString *urlString);
+FOUNDATION_EXPORT NSString *ComExampleDataHttpUtil_toStringWithNSString_(NSString *urlString);
 
 FOUNDATION_EXPORT void ComExampleDataHttpUtil_init(ComExampleDataHttpUtil *self);
 

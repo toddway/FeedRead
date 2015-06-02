@@ -38,12 +38,11 @@ public class RetrofitArticle extends Article implements Serializable {
         String name;
     }
 
-    @Override
+
     public String getTitle() {
         return title;
     }
 
-    @Override
     public List<String> getCategories() {
         ArrayList<String> strings = new ArrayList<>();
         for (Category category : categories) {
@@ -52,12 +51,12 @@ public class RetrofitArticle extends Article implements Serializable {
         return strings;
     }
 
-    @Override
+
     public String getLink() {
         return link;
     }
 
-    @Override
+
     public String getDescription() {
         return description;
     }

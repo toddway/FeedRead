@@ -35,12 +35,6 @@
 
 - (NSString *)getTitle;
 
-- (void)setCategoriesWithJavaUtilList:(id<JavaUtilList>)categories;
-
-- (void)setLinkWithNSString:(NSString *)link;
-
-- (void)setTitleWithNSString:(NSString *)title;
-
 - (NSString *)description;
 
 @end

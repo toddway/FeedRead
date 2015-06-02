@@ -8,27 +8,16 @@ public class Article implements Serializable {
     String title;
     List<String> categories;
     String link;
-    public String imageUrl;
+    String imageUrl;
     String description;
 
-    public void setLink(String link) {
-        this.link = link;
-    }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public List<String> getCategories() {
         return categories;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
     }
 
     public String getLink() {
@@ -52,8 +41,8 @@ public class Article implements Serializable {
 
     public static Article create(String title, List<String> categories) {
         Article article = new Article();
-        article.setTitle(title);
-        article.setCategories(categories);
+        article.title = title;
+        article.categories = categories;
         return article;
     }
 }

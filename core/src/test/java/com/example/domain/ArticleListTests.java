@@ -1,10 +1,5 @@
 package com.example.domain;
 
-import com.example.domain.Article;
-import com.example.domain.GetArticleListInteractor;
-import com.example.domain.ArticleRepository;
-import com.toddway.shelf.Shelf;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 public class ArticleListTests {
 
-    GetArticleListInteractor getArticleListInteractor;
+    ArticleListInteractor articleListInteractor;
     ArticleRepository articleRepository;
     static String URL = "mock url";
 
@@ -28,12 +23,12 @@ public class ArticleListTests {
     public void beforeEach() {
         articleRepository = mock(ArticleRepository.class);
         when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList1());
-        getArticleListInteractor = new GetArticleListInteractor(articleRepository, new File("/tmp/shelf"));
+        articleListInteractor = new ArticleListInteractor(articleRepository, new File("/tmp/shelf"));
     }
 
     @Test
-    public void testGetArticles() throws Exception {
-        List<Article> articles = getArticleListInteractor.get(URL);
+    public void testPrintArticles() throws Exception {
+        List<Article> articles = articleListInteractor.get(URL);
         assertTrue(articles.size() <= 5);
         for (Article article : articles) {
             System.out.println(article.toString());
@@ -42,8 +37,8 @@ public class ArticleListTests {
 
     @Test
     public void testGetArticleTitle() throws Exception {
-        List<Article> articles = getArticleListInteractor.useCache(false).get(URL);
-        assertEquals(articles.get(0).getTitle(), sampleArticleList1().get(0).getTitle());
+        List<Article> articles = articleListInteractor.useCache(false).get(URL);
+        assertEquals(articles.get(0).title, sampleArticleList1().get(0).title);
     }
 
     @Test
@@ -55,24 +50,23 @@ public class ArticleListTests {
         when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList2());
 
         //assert that we bypass cache and get the new title
-        List<Article> articles = getArticleListInteractor.useCache(false).get(URL);
-        assertEquals(articles.get(0).getTitle(), sampleArticleList2().get(0).getTitle());
+        List<Article> articles = articleListInteractor.useCache(false).get(URL);
+        assertEquals(articles.get(0).title, sampleArticleList2().get(0).title);
     }
-//
-//    @Test
-//    public void testGetArticleTitleUsingCache() throws Exception {
-//        //prime the article cache
-//        List<Article> articles = feedRepository.getArticles(false);
-//        assertEquals(articles.get(0).getTitle(), "First article");
-//
-//        //change the remote article title
-//        when(feedRepository.getRemoteFeed()).thenReturn(sampleFeed2());
-//
-//        //assert that we get the cached title and not the new title
-//        articles = feedRepository.getArticles(true);
-//        assertEquals(articles.get(0).getTitle(), "First article");
-//    }
-//
+
+    @Test
+    public void testGetArticleTitleUsingCache() throws Exception {
+        //prime the article cache
+        testGetArticleTitle();
+
+        //change the list returned by the repo
+        when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList2());
+
+        //assert that we get the cached title and not the new title
+        List<Article> articles = articleListInteractor.useCache(true).get(URL);
+        assertEquals(articles.get(0).title, sampleArticleList1().get(0).title);
+    }
+
 //    @Test
 //    public void testGetArticlesByCategory() throws Exception {
 //        List<Article> articles = feedRepository.getArticlesInCategory("android", false);

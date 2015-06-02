@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class GetArticleListInteractor {
+public class ArticleListInteractor {
 
     ArticleRepository articleRepository;
     Shelf cacheShelf;
     boolean useCache = true;
 
-    public GetArticleListInteractor(ArticleRepository articleRepository, File cacheDirectory) {
+    public ArticleListInteractor(ArticleRepository articleRepository, File cacheDirectory) {
         this.articleRepository = articleRepository;
         this.cacheShelf = new Shelf(cacheDirectory);
     }
@@ -23,7 +23,7 @@ public class GetArticleListInteractor {
         String key = "key";
 
         if (useCache && !cacheShelf.item(key).isOlderThan(5, TimeUnit.MINUTES)) {
-            return cacheShelf.item(key).get(List.class);
+            return cacheShelf.item(key).asListOf(Article.class);
         }
 
         List<Article> articles = articleRepository.getArticles(url);
@@ -32,7 +32,7 @@ public class GetArticleListInteractor {
         return articles;
     }
 
-    public GetArticleListInteractor useCache(boolean useCache) {
+    public ArticleListInteractor useCache(boolean useCache) {
         this.useCache = useCache;
         return this;
     }
@@ -41,7 +41,7 @@ public class GetArticleListInteractor {
         ArrayList<Article> newList = new ArrayList<>();
 
         for (Article article : articles) {
-            for (String s : article.getCategories()) {
+            for (String s : article.categories) {
                 if (category.equals(s)) {
                     newList.add(article);
                 }
