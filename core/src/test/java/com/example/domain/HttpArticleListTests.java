@@ -27,18 +27,4 @@ public class HttpArticleListTests {
         System.out.println("articles:" + articles);
     }
 
-//    @Test
-//    public void testJsonToProto() {
-//        String json = HttpUtil.toString("https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=" + URL);
-//        try {
-//            Protos.FeedResponse.Builder builder = Protos.FeedResponse.newBuilder();
-//            JsonFormat.merge(json, builder);
-//            Protos.FeedResponse response = builder.build();
-//            System.out.println("title:" + response.getResponseData().getFeed().getEntriesList());
-//        } catch (JsonFormat.ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Assert.assertTrue(true);
-//    }
 }

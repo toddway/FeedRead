@@ -27,38 +27,5 @@ j2objcConfig {
     translateFlags = "-use-arc --build-closure"
 }
 
-apply plugin: 'com.google.protobuf'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.4.1'
-    }
-}
-
-protocDep = 'com.google.protobuf:protoc:3.0.0-alpha-2'
-
-dependencies {
-    compile 'com.google.protobuf:protobuf-java:3.0.0-alpha-2'
-    compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-2'
-}
-
-
-sourceSets {
-    main {
-        proto {
-            builtins {
-                javanano {
-                    // Options added to --javanano_out
-                    option 'java_multiple_files=true'
-                    option 'ignore_services=true'
-                }
-            }
-        }
-    }
-}
-
 
 
