@@ -1,5 +1,8 @@
 package com.example.domain;
 
+import com.toddway.shelf.GsonFileStorage;
+import com.toddway.shelf.Shelf;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +26,7 @@ public class ArticleListTests {
     public void beforeEach() {
         articleRepository = mock(ArticleRepository.class);
         when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList1());
-        articleListInteractor = new ArticleListInteractor(articleRepository, new File("/tmp/shelf"));
+        articleListInteractor = new ArticleListInteractor(articleRepository, new Shelf(new GsonFileStorage(new File("/tmp/shelf"))));
     }
 
     @Test

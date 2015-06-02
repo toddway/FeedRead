@@ -2,3 +2,6 @@ include ':app', ':data', 'core'
 
 include ':shelf'
 project(':shelf').projectDir = new File(settingsDir, '../Shelf/shelf')
+
+include ':shelf-gson'
+project(':shelf-gson').projectDir = new File(settingsDir, '../Shelf/shelf-gson')

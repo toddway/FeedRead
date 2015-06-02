@@ -3,7 +3,6 @@ package com.example.domain;
 
 import com.toddway.shelf.Shelf;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,9 +13,9 @@ public class ArticleListInteractor {
     Shelf cacheShelf;
     boolean useCache = true;
 
-    public ArticleListInteractor(ArticleRepository articleRepository, File cacheDirectory) {
+    public ArticleListInteractor(ArticleRepository articleRepository, Shelf cacheShelf) {
         this.articleRepository = articleRepository;
-        this.cacheShelf = new Shelf(cacheDirectory);
+        this.cacheShelf = cacheShelf;
     }
 
     public List<Article> get(String url) {

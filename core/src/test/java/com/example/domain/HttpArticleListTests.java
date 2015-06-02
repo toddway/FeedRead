@@ -2,6 +2,8 @@ package com.example.domain;
 
 
 import com.example.data.GsonArticleRepository;
+import com.toddway.shelf.GsonFileStorage;
+import com.toddway.shelf.Shelf;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +20,7 @@ public class HttpArticleListTests {
     @Before
     public void beforeEach() {
         articleRepository = new GsonArticleRepository();
-        articleListInteractor = new ArticleListInteractor(articleRepository, new File("/tmp/shelf"));
+        articleListInteractor = new ArticleListInteractor(articleRepository, new Shelf(new GsonFileStorage(new File("/tmp/shelf"))));
     }
 
     @Test
