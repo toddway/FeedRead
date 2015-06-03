@@ -22,7 +22,7 @@ public class ArticleListInteractor {
         String key = "key";
 
         if (useCache && !cacheShelf.item(key).isOlderThan(5, TimeUnit.MINUTES)) {
-            return cacheShelf.item(key).asListOf(Article.class);
+            return cacheShelf.item(key).getListOf(Article.class);
         }
 
         List<Article> articles = articleRepository.getArticles(url);
