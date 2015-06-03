@@ -16,22 +16,26 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ArticleListTests {
+public class ArticleListInteractorTests {
 
     ArticleListInteractor articleListInteractor;
     ArticleRepository articleRepository;
-    static String URL = "mock url";
+    Shelf diskCache;
+    String url;
 
     @Before
     public void beforeEach() {
+        //dependency injection
+        url =  "http://feeds.feedburner.com/toddway";
         articleRepository = mock(ArticleRepository.class);
-        when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList1());
-        articleListInteractor = new ArticleListInteractor(articleRepository, new Shelf(new GsonFileStorage(new File("/tmp/shelf"))));
+        when(articleRepository.getArticles(url)).thenReturn(sampleArticleList1());
+        diskCache = new Shelf(new GsonFileStorage(new File("/tmp/shelf")));
+        articleListInteractor = new ArticleListInteractor(articleRepository, diskCache);
     }
 
     @Test
     public void testPrintArticles() throws Exception {
-        List<Article> articles = articleListInteractor.get(URL);
+        List<Article> articles = articleListInteractor.get(url);
         assertTrue(articles.size() <= 5);
         for (Article article : articles) {
             System.out.println(article.toString());
@@ -40,7 +44,7 @@ public class ArticleListTests {
 
     @Test
     public void testGetArticleTitle() throws Exception {
-        List<Article> articles = articleListInteractor.useCache(false).get(URL);
+        List<Article> articles = articleListInteractor.useCache(false).get(url);
         assertEquals(articles.get(0).title, sampleArticleList1().get(0).title);
     }
 
@@ -50,10 +54,10 @@ public class ArticleListTests {
         testGetArticleTitle();
 
         //change the list returned by the repo
-        when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList2());
+        when(articleRepository.getArticles(url)).thenReturn(sampleArticleList2());
 
         //assert that we bypass cache and get the new title
-        List<Article> articles = articleListInteractor.useCache(false).get(URL);
+        List<Article> articles = articleListInteractor.useCache(false).get(url);
         assertEquals(articles.get(0).title, sampleArticleList2().get(0).title);
     }
 
@@ -63,10 +67,10 @@ public class ArticleListTests {
         testGetArticleTitle();
 
         //change the list returned by the repo
-        when(articleRepository.getArticles(URL)).thenReturn(sampleArticleList2());
+        when(articleRepository.getArticles(url)).thenReturn(sampleArticleList2());
 
         //assert that we get the cached title and not the new title
-        List<Article> articles = articleListInteractor.useCache(true).get(URL);
+        List<Article> articles = articleListInteractor.useCache(true).get(url);
         assertEquals(articles.get(0).title, sampleArticleList1().get(0).title);
     }
 

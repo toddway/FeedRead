@@ -12,20 +12,20 @@ import java.io.File;
 import java.util.List;
 
 
-public class HttpArticleListTests {
-    ArticleListInteractor articleListInteractor;
+public class GsonArticleRepositoryTests {
     ArticleRepository articleRepository;
-    static String URL = "http://feeds.feedburner.com/toddway";
+    String url;
 
     @Before
     public void beforeEach() {
+        //dependency injection
+        url = "http://feeds.feedburner.com/toddway";
         articleRepository = new GsonArticleRepository();
-        articleListInteractor = new ArticleListInteractor(articleRepository, new Shelf(new GsonFileStorage(new File("/tmp/shelf"))));
     }
 
     @Test
-    public void testSomething() {
-        List<Article> articles = articleListInteractor.get(URL);
+    public void testGetArticleList() {
+        List<Article> articles = articleRepository.getArticles(url);
         System.out.println("articles:" + articles);
     }
 

@@ -1,10 +1,9 @@
 package com.example.domain;
 
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Article implements Serializable {
+public class Article {
     String title;
     List<String> categories;
     String link;

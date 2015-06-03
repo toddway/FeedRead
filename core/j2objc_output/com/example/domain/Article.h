@@ -7,11 +7,10 @@
 #define _ComExampleDomainArticle_H_
 
 #include "J2ObjC_header.h"
-#include "java/io/Serializable.h"
 
 @protocol JavaUtilList;
 
-@interface ComExampleDomainArticle : NSObject < JavaIoSerializable > {
+@interface ComExampleDomainArticle : NSObject {
  @public
   NSString *title_;
   id<JavaUtilList> categories_;
