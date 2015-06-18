@@ -1,7 +1,7 @@
 include ':app', ':data', 'core'
 
 include ':shelf'
-project(':shelf').projectDir = new File(settingsDir, '../Shelf/shelf')
+project(':shelf').projectDir = new File(settingsDir, 'shelf/shelf')
 
 include ':shelf-gson'
-project(':shelf-gson').projectDir = new File(settingsDir, '../Shelf/shelf-gson')
+project(':shelf-gson').projectDir = new File(settingsDir, 'shelf/shelf-gson')
